@@ -1,6 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const cors = require('cors');
 
+const corsOptions = {
+  origin: "https://quiztime-sh.vercel.app/",
+  optionsSuccessStatus: 200 
+}
 
 const users = [
   {
@@ -28,16 +33,18 @@ function lookUpUserById(email, arr){
 
 
 /* GET users listing. */
-router.post('/', (req, res, next)=> {
+router.post('/', cors(corsOptions), (req, res, next)=> {
   const get_user = lookUpUserById(req.body.email, users);
   if(get_user){
     res.status(200).send({
+      status: "success",
       message: "Successfully logged in.",
       name: get_user.name,
       email: req.body.email
     });
   }else{
     res.status(404).send({
+      status: "error",
       message: "Failed to log in.",
       name: "",
       email: ""
