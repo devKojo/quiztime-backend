@@ -3,7 +3,7 @@ const router = express.Router();
 const cors = require('cors');
 
 const corsOptions = {
-  origin: "https://quiztime-sh.vercel.app/",
+  origin: "https://quiztime-sh.vercel.app/signin",
   optionsSuccessStatus: 200 
 }
 
